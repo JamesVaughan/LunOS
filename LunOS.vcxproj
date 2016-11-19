@@ -159,6 +159,7 @@
     <ClCompile Include="src\Threading\Tasks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="build.bat" />
     <None Include="Build.ps1" />
     <None Include="link.ld" />

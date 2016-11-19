@@ -215,7 +215,8 @@
     <None Include="start.asm">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ExecuteFromPS.ps1">
+    <None Include="Build.ps1" />
+    <None Include=".gitignore">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
