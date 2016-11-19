@@ -1,0 +1,107 @@
+Replicated Fault Tolerance
+	Is the ability of a system to continue operationg in the presence of faults
+	Closely-related to requirements on dependable systems
+		abvailability
+			probability thtat they system is working correctly at any given time
+		reliability
+		safety
+			temporary failts do not lead to catastrophic failures
+		maintainability
+			how easy is it to bring back a failed service
+			
+Avoiding faults
+	All of the standard copying with complexity stuff
+		SE, testing
+	There are also some design rules that can help
+		avoid situations in which things often go wrong
+		Example: regluar maintenance
+		Example: detect problematic activity at system boundary
+	Note: That this reduces rather than prevents problems
+	
+Masking/Hiding faults
+	Obvious requirement: redundancy
+		Must be able to repair broken sets of bits
+			wg error correction codes
+		Must be able to communicate despite broken paths
+		Must be able to continue with broken servers
+			Requires group communication -> distro consensus
+	
+Recovering from faults
+	Many systems are designed to tolerate a single fault
+	In gerneate, requires restoring state of restarted process or server
+		CheckPointing: save state to stable storage
+		Replicated state machine:
+		
+Replicated state machines
+	Arc
+		Implement a service as a state machine
+			state variables
+			commands
+		replicate the styate machine on difference servers
+		clients interact with sets of servers
+	Rationale
+		Fault-tolerance/Availability/Reliability
+		
+State nachine commands
+	A message that the state machine receives
+	commands must execute atomically with respect to other commands
+		referred to as linearizability
+	Commands
+		modify state variables
+		output
+	The state/output of a state machine is completely determined by
+		initial state
+		sequence of commands
+		
+RSM & Failures
+	In the case of failures
+		clients must determine correct output of RSMs
+		RSMs are called t-tolerant
+		fail-stop: t+1 replicas required
+		Byzantine: 2t+1 replicas required
+	Different than broadcast consensus failures
+		one client must decide on result, replicas don't have to agree with each other about result
+	Each correct replica
+		Must execute same commands in same order
+		since all correct replicas must have the same state
+		therefore, RSMs require Distributed Consensus to agree on order of commands
+	Needs form of group communication called atomic broadcast
+	
+Group communication
+	In many application processes must be able to reliably broadcast message, so that they agree on the set of messages the deliver
+	Reliable broadcast is difficult because distributed processes do not know each other's state
+	Much of this material is taken from chapter five by Hadzilaxos and Toueg in "Distributed Systems"
+		Reliable broadcast taxonomy
+		Example
+		
+
+Another viewpoint
+	Distributed Consensus
+		servers communicate amongst themselves to reach an agreement for the state
+	Reliable Broadcast
+		servers communicate amongst themselves to order messages
+	What else can clients do?
+		Clients can read and write to sets of servers in a consistent manner
+		Storing/restoring the state variables to servers and implementing a state machine locally is similar to RSMs.
+		
+Voting
+	Let V be the nuimber of votes in the system
+	Let W be the number of voters required to write
+	Let R be the number of votes to read
+	Overlap constraint
+		R + W > V
+	Recommend:
+		2*W > V
+		R + W < V + epsilon
+	Data must contain a version number or a timestamp
+	If constraints are met, then data will remain consistent
+	Note that votes can be arbitrarily assigned to servers in the system
+	
+Quorums
+	Quorums are a generaliztion of voting
+		Organize servers into logical structures
+	Overlap constraint
+		every write quorum must overlap with every real quorum
+	Example: writes must go to a column, reads must get a row
+	---Note that voting does not imply majority---
+	

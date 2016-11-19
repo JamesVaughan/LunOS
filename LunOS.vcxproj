@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7BA08466-0857-4C8D-A6C8-47C7D9B374B8}</ProjectGuid>
+    <RootNamespace>LunOS</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Graphics\BMP.cpp" />
+    <ClCompile Include="src\Graphics\Font.cpp" />
+    <ClCompile Include="src\GUI\Button.cpp" />
+    <ClCompile Include="src\GUI\Component.cpp" />
+    <ClCompile Include="src\io\DiskAccess.cpp" />
+    <ClCompile Include="src\io\Fat32.cpp" />
+    <ClCompile Include="src\io\FileSystem.cpp" />
+    <ClCompile Include="src\io\Graphics.cpp" />
+    <ClCompile Include="src\io\Keyboard.cpp" />
+    <ClCompile Include="src\io\Mouse.cpp" />
+    <ClCompile Include="src\io\PCIStream.cpp" />
+    <ClCompile Include="src\io\ResourceHandle.cpp" />
+    <ClCompile Include="src\io\Stream.cpp" />
+    <ClCompile Include="src\io\TextReader.cpp" />
+    <ClCompile Include="src\kern\Apic.cpp" />
+    <ClCompile Include="src\kern\console.cpp" />
+    <ClCompile Include="src\kern\gdt.cpp" />
+    <ClCompile Include="src\kern\idt.cpp" />
+    <ClCompile Include="src\kern\io\dma.cpp" />
+    <ClCompile Include="src\kern\io\hdd.cpp" />
+    <ClCompile Include="src\kern\io\io.cpp" />
+    <ClCompile Include="src\kern\io\isa.cpp" />
+    <ClCompile Include="src\kern\io\mouse.cpp" />
+    <ClCompile Include="src\kern\io\pci.cpp" />
+    <ClCompile Include="src\kern\io\sata.cpp" />
+    <ClCompile Include="src\kern\io\vesa.cpp" />
+    <ClCompile Include="src\kern\io\vga.cpp" />
+    <ClCompile Include="src\kern\irq.cpp" />
+    <ClCompile Include="src\kern\isrs.cpp" />
+    <ClCompile Include="src\kern\kb.cpp" />
+    <ClCompile Include="src\kern\linkedList.cpp" />
+    <ClCompile Include="src\kern\main.cpp" />
+    <ClCompile Include="src\kern\maxheap.cpp" />
+    <ClCompile Include="src\kern\memory.cpp" />
+    <ClCompile Include="src\kern\powerManagement.cpp" />
+    <ClCompile Include="src\kern\process.cpp" />
+    <ClCompile Include="src\kern\scheduler.cpp" />
+    <ClCompile Include="src\kern\scheduler2.cpp" />
+    <ClCompile Include="src\kern\string.cpp" />
+    <ClCompile Include="src\kern\system.cpp" />
+    <ClCompile Include="src\kern\timer.cpp" />
+    <ClCompile Include="src\kern\user.cpp" />
+    <ClCompile Include="src\Minesweeper.cpp" />
+    <ClCompile Include="src\prompt.cpp" />
+    <ClCompile Include="src\synchronization.cpp" />
+    <ClCompile Include="src\SystemCalls.cpp" />
+    <ClCompile Include="src\Threading\Tasks.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build.bat" />
+    <None Include="Build.ps1" />
+    <None Include="link.ld" />
+    <None Include="Makefile" />
+    <None Include="src\kern\io\pci.asm" />
+    <None Include="start.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Graphics\BMP.h" />
+    <ClInclude Include="include\Graphics\Font.h" />
+    <ClInclude Include="include\GUI\Button.hpp" />
+    <ClInclude Include="include\GUI\Component.hpp" />
+    <ClInclude Include="include\GUI\Container.hpp" />
+    <ClInclude Include="include\GUI\GUI.hpp" />
+    <ClInclude Include="include\IOCalls.h" />
+    <ClInclude Include="include\io\DiskAccess.h" />
+    <ClInclude Include="include\io\Fat32.h" />
+    <ClInclude Include="include\io\FileSystem.h" />
+    <ClInclude Include="include\io\Graphics.h" />
+    <ClInclude Include="include\io\Io.h" />
+    <ClInclude Include="include\io\Keyboard.h" />
+    <ClInclude Include="include\io\Mouse.h" />
+    <ClInclude Include="include\io\Pci.h" />
+    <ClInclude Include="include\io\ResourceHandle.hpp" />
+    <ClInclude Include="include\io\Stream.h" />
+    <ClInclude Include="include\io\TextReader.h" />
+    <ClInclude Include="include\kern\Apic.h" />
+    <ClInclude Include="include\kern\console.h" />
+    <ClInclude Include="include\kern\core.h" />
+    <ClInclude Include="include\kern\grub.h" />
+    <ClInclude Include="include\kern\io\dma.h" />
+    <ClInclude Include="include\kern\io\HardDrive.h" />
+    <ClInclude Include="include\kern\io\io.h" />
+    <ClInclude Include="include\kern\io\isa.h" />
+    <ClInclude Include="include\kern\io\mouse.h" />
+    <ClInclude Include="include\kern\io\pci.h" />
+    <ClInclude Include="include\kern\io\Sata.h" />
+    <ClInclude Include="include\kern\io\vesa.h" />
+    <ClInclude Include="include\kern\io\vga.h" />
+    <ClInclude Include="include\kern\keyboard.h" />
+    <ClInclude Include="include\kern\linkedList.h" />
+    <ClInclude Include="include\kern\maxheap.h" />
+    <ClInclude Include="include\kern\memory.h" />
+    <ClInclude Include="include\kern\powerManagement.h" />
+    <ClInclude Include="include\kern\process.h" />
+    <ClInclude Include="include\kern\process.hpp" />
+    <ClInclude Include="include\kern\scheduler.h" />
+    <ClInclude Include="include\kern\scheduler.hpp" />
+    <ClInclude Include="include\kern\system.h" />
+    <ClInclude Include="include\kern\system.hpp" />
+    <ClInclude Include="include\kern\user.h" />
+    <ClInclude Include="include\LunOS.h" />
+    <ClInclude Include="include\Minesweeper.h" />
+    <ClInclude Include="include\prompt.h" />
+    <ClInclude Include="include\Stdlib.h" />
+    <ClInclude Include="include\Stdlib\StdLib.hpp" />
+    <ClInclude Include="include\String.h" />
+    <ClInclude Include="include\synchronization.h" />
+    <ClInclude Include="include\SysCall.h" />
+    <ClInclude Include="include\SystemCalls.h" />
+    <ClInclude Include="include\Threading\Tasks.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

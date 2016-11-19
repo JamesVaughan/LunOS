@@ -1,0 +1,19 @@
+#####################################LunOS 0.05.00 design goals #################################################
+
+The primary goal of LunOS is Luls... as such our current focus is getting enough of a kernel together to create a NES
+emulator.
+
+In order to do this we will need...
+
+- VGA Driver
+- Graphics Interface Library (for said driver / program interaction)
+- DMA Control
+- FileSystem Access
+- USB Support (last thing to do)
+- Hard drive driver
+- Sound Driver
+
+(If built in user space)
+- User Space programs
+- User Space Library
+(Alternativly we could build this program in kernel space, probably the best option to start with)

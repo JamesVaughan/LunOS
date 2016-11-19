@@ -1,0 +1,102 @@
+Announcements
+	Test #1 next week Wednesday 
+		2 hours, 4-6pm
+		BA2139
+		Covers material to end of this week (Lecture 11)
+
+Multiprocessor Scheduler
+	To support multiprogramming
+		Large numbers of independent processes
+		Simplified administration
+		EG CDF wolves, compute servers
+	To support parallel programming
+		job consists of multiple cooperation/communicating threads and/or processes
+		NOT INDEPENDENT!!!
+
+Basic MP Scheduling
+	Given a set of runnable theads, and a set of CPU's, assing
+	 threads to CPU's
+	Same considerations as uniprocessor scheduling
+		Fairness, efficiency, throughput, responce time
+	But also new consideratiokns
+		Ready queue implementation
+		Load balancing
+		Processor affinity
+
+Option 1) Single Shared Queue
+	Scheduling events occure per CPU
+		Local timer interrupt
+		Currently-executing thread blocks or yields
+		Event is handled that unblocks thread
+	Scheduler code executing on any CPU simply accesses shared queue
+		Synchronization is needed
+			
+Option 2) Multiple (per CPU	) Ready Queue
+	Scheduling code accesses queue for current CPU
+	Issues
+		To which queue are new threads added
+		What about unblocked threads
+		Load balancing
+	Required syncronization
+
+Load Balancing
+	Try to keep run queue sizes balanced across system
+		Main Goal - CPU should not be idle while other CPU's are
+			waiting threads in the queues
+		Secondary - scheduling overhead may scale with size of run queue
+			Keep this overhead roughly the same for all cpu's
+	Push model - kernel daemon checks queue lengths periodically, moves threads
+	Pull model - CPU notices its queue is empty ( or shorter than a threshold) and
+		steals threads from other queues
+	Many systems use both
+	
+Processor Affinity
+	As threads run, state accumulates in CPU cashe
+	Repeated scheduling on the same cpu can often reuse this state
+	Scheduling on different CPU requires reloading new cashe
+		And possibly invalidating old cashe
+	Try to keep thread on same CPU it used last
+		automatic
+		advisory hints from user
+		Mandatory user-selected CPU
+
+Symbiotic Scheduling
+	Threads load data into cashe
+	Expect multiple threads to trash each others' state as they run
+	Can try to detect cashe needs and scheduke threads that can share nicely on the same CPU
+		Several threads with samll cashe footprints may all be able to keep data in cashe at same time
+	Threads with no locality might as well execute on the same cpu since aslmost always miss in cashe anyways
+	
+Parallel Job Scheduling
+	Job is a collection of processes/threads that cooperate to solve some problem
+	How the components of the job are scheduled has a major effect on performance
+	Two major stratagices
+		space sharing
+		time sharing
+
+Space Sharing
+	Divide processors into groups
+		Fixed variable or adaptive
+	Assign job to dedicate set of processors
+		Ideally one CPU er thread in job
+	Pros:
+		Reduce context switch overhead
+		Strong affinity
+		All runnable threads execute at same time
+	Cons:
+		Inflexible
+			CPU in one partition may be idle while another partition has multiple jobs waiting to run
+			Difficult to deal with dynamically changing job sizes
+
+Limits of FCFS (Space Sharing)
+	Scheduling convoy effect
+		Long average wait times due to large jobs
+		Exists with FCFS uniprocessor batch systems
+		Much worse in parallel systems
+			Fragmentation of CPU Space
+		Backfilling does this however it looks back on the schedule to
+		 fill idle cpu's with tasks, augmenting FCFS.
+		There are variation on blackfilling, such as adding priorities to
+		 which jobs are filled in the spaces.
+		Queue lokahead using dynamic programming can build an optimal schedule.
+		

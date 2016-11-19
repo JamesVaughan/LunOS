@@ -1,0 +1,15 @@
+LunOS - Lunar Operating System Graphics Subsystem specification
+
+Goal:
+Provide a buffeed graphics datastream protocol to enable "buffered" commands to increase performance.
+
+Protocol:
+1 byte for command id, followed by specific format for given command.
+
+Commands:
+0 - End of commands, the last command, signalling that we have finished rendering this batch of commands
+1 - Change Graphics Mode, 0 - text 1 - graphics(320x200)
+2 - Render pixel, unsigned int x, unsigned int y, byte r, byte g, byte b
+3 - Render rect, unsigned int x, unsigned int y, unsigned int width, unsigned int height, byte r, byte g, byte b
+4 - Render bitmap, unsigned int x, unsigned int y, unsigned int width, unsigned int height, ptr* bitmap
+5 - Render Font, unsigned int x, unsigned int y, unsigned char* text, Font* font

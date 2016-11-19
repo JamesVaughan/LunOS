@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="all" />
+	<File name="Makefile" open="0" top="0" tabpos="3">
+		<Cursor position="1651" topLine="21" />
+	</File>
+	<File name="include/io/Graphics.h" open="0" top="0" tabpos="0">
+		<Cursor position="1194" topLine="31" />
+	</File>
+	<File name="include/kern/io/Sata.h" open="0" top="0" tabpos="1">
+		<Cursor position="5171" topLine="0" />
+	</File>
+	<File name="include/kern/io/vga.h" open="0" top="0" tabpos="4">
+		<Cursor position="1170" topLine="18" />
+	</File>
+	<File name="src/SystemCalls.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1671" topLine="77" />
+	</File>
+	<File name="src/io/Graphics.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="4833" topLine="164" />
+	</File>
+	<File name="src/kern/io/vga.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="3290" topLine="119" />
+	</File>
+	<File name="src/kern/main.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="263" topLine="162" />
+	</File>
+	<File name="src/kern/process.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="2220" topLine="76" />
+	</File>
+	<File name="src/kern/system.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="6779" topLine="336" />
+	</File>
+	<File name="src/prompt.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="2148" topLine="92" />
+	</File>
+</CodeBlocks_layout_file>

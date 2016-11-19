@@ -1,0 +1,128 @@
+SUBARGS := -std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-packed-bitfield-compat -m32 -fno-stack-protector -fno-exceptions -fno-rtti\
+  -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -nostdinc++ \
+  -fno-builtin -fpermissive -I./include -c -o
+ARGS := -O ${SUBARGS}
+OptimizeARGS := -O1 ${SUBARGS}
+OptimizeO2Args := -O2 ${SUBARGS}
+HighOptimzeARGS := -O3 ${SUBARGS}
+COMPILE := g++ ${HighOptimzeARGS}
+NOOPTCOMP := g++-4.8 ${HighOptimzeARGS}
+OPTIMIZEDCOMPILE := g++ -funsafe-math-optimizations -funsafe-loop-optimizations -funroll-loops ${OptimizeO2Args}
+# -funsafe-math-optimizations -funsafe-loop-optimizations -funroll-loops  ${HighOptimzeARGS}
+OPTIMIZEDCOMPILE48 := g++-4.8 -funsafe-math-optimizations -funsafe-loop-optimizations -funroll-loops ${HighOptimzeARGS}
+B := bin/
+S := src/
+KB := bin/kern/
+KBIO := bin/kern/io/
+BIO := bin/io/
+BGR := bin/Graphics/
+BGUI := bin/GUI/
+BTHD := bin/Threading/
+KS := src/kern/
+KSIO := src/kern/io/
+SIO  := src/io/
+SGR  := src/Graphics/
+SGUI := src/GUI/
+STHD := src/Threading/
+# This needs to be done by powershell now since FAT32 isn't supported by WSL
+SAVE := /mnt/e
+all:
+	@echo Assembling the assembly base
+	@nasm -f aout -o $(KB)start.o start.asm
+	@nasm -f aout -o $(KBIO)pciIO.o $(KSIO)pci.asm
+
+	@echo Compiling C/C++
+	@$(OPTIMIZEDCOMPILE) $(KB)main.o $(KS)main.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)gdt.o $(KS)gdt.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)idt.o $(KS)idt.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)isrs.o $(KS)isrs.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)irq.o $(KS)irq.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)Apic.o $(KS)Apic.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)timer.o $(KS)timer.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)kb.o $(KS)kb.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)console.o $(KS)console.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)string.o $(KS)string.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)memory.o $(KS)memory.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)maxheap.o $(KS)maxheap.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)process.o $(KS)process.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)linkedList.o $(KS)linkedList.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)user.o $(KS)user.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)powerManagement.o $(KS)powerManagement.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)scheduler.o $(KS)scheduler2.cpp
+	@$(OPTIMIZEDCOMPILE) $(B)prompt.o $(S)prompt.cpp
+	@$(OPTIMIZEDCOMPILE) $(B)synchronization.o $(S)synchronization.cpp
+	@$(OPTIMIZEDCOMPILE) $(B)Minesweeper.o $(S)Minesweeper.cpp
+	@$(OPTIMIZEDCOMPILE) $(KB)system.o $(KS)system.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)io.o $(KSIO)io.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)dma.o $(KSIO)dma.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)pci.o $(KSIO)pci.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)isa.o $(KSIO)isa.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)mouse.o $(KSIO)mouse.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)vga.o $(KSIO)vga.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)vesa.o $(KSIO)vesa.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)hdd.o $(KSIO)hdd.cpp
+	@$(OPTIMIZEDCOMPILE) $(KBIO)sata.o $(KSIO)sata.cpp
+	@$(OPTIMIZEDCOMPILE) $(B)SystemCalls.o $(S)SystemCalls.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)Stream.o $(SIO)Stream.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)ResourceHandle.o $(SIO)ResourceHandle.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)Graphics.o $(SIO)Graphics.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)Mouse.o $(SIO)Mouse.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)Keyboard.o $(SIO)Keyboard.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)DiskAccess.o $(SIO)DiskAccess.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)FileSystem.o $(SIO)FileSystem.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)TextReader.o $(SIO)TextReader.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)Fat32.o $(SIO)Fat32.cpp
+	@$(OPTIMIZEDCOMPILE) $(BIO)PCIStream.o $(SIO)PCIStream.cpp
+	@$(OPTIMIZEDCOMPILE) $(BGR)BMP.o $(SGR)BMP.cpp
+	@$(OPTIMIZEDCOMPILE) $(BGR)Font.o $(SGR)Font.cpp
+	@$(OPTIMIZEDCOMPILE) $(BGUI)Component.o $(SGUI)Component.cpp
+	@$(OPTIMIZEDCOMPILE) $(BGUI)Button.o $(SGUI)Button.cpp
+	@$(OPTIMIZEDCOMPILE) $(BTHD)Tasks.o $(STHD)Tasks.cpp
+
+	@#linking files
+	@ld -melf_i386 -T link.ld -o kernel.elf $(KB)start.o $(KB)main.o $(KB)gdt.o \
+	 $(KB)idt.o $(KB)isrs.o $(KB)irq.o $(KB)memory.o $(KB)scheduler.o $(KB)timer.o \
+	 ${KB}Apic.o \
+	 $(KB)kb.o  $(KBIO)mouse.o $(KB)console.o $(KB)string.o $(KB)maxheap.o $(KB)process.o\
+	 $(KB)linkedList.o \
+	 $(KB)user.o $(KB)powerManagement.o $(KB)system.o  \
+	 $(KBIO)io.o $(KBIO)dma.o $(KBIO)pci.o $(KBIO)isa.o $(KBIO)pciIO.o $(KBIO)vga.o $(KBIO)vesa.o \
+	 $(KBIO)hdd.o $(KBIO)sata.o\
+	 $(BGR)BMP.o $(BGR)Font.o\
+	 $(B)SystemCalls.o $(B)synchronization.o $(B)prompt.o $(B)Minesweeper.o\
+	 $(BIO)Stream.o $(BIO)ResourceHandle.o $(BIO)Graphics.o $(BIO)Mouse.o $(BIO)Keyboard.o\
+	 $(BIO)DiskAccess.o $(BIO)FileSystem.o $(BIO)TextReader.o $(BIO)Fat32.o\
+	 $(BIO)PCIStream.o\
+	 $(BGUI)Component.o $(BGUI)Button.o\
+	 $(BTHD)Tasks.o
+	#Cleaning up object files...
+	@#echo "copying files to the boot drive"
+	@#cp kernel.elf $(SAVE)/boot/
+	@#umount $(SAVE)
+	@#We need include the USB key in the fstab in order to automatically mount
+	@#mount $(SAVE)
+	@#echo Done!
+
+
+#Launch:
+#	To launch the kernel, buy a USB key and whatever /dev/sdX it is, just run this... much easier
+#	sudo qemu -hda /dev/sdc
+# To figure out where your USB key is saved, run sudo fdisk -l
+
+#To install GRUB "2.00"+ you need to install it via
+# grub-install --root-directory /media/X /dev/sdX
+# After this you will just need to modify the grub.cfg
+# LunOS will need to use the 'multiboot' command to load the kernel
+# After the kernel is loaded you can just 'boot' it up
+#sudo kvm -smp 2 -hda /dev/sdb -cpu core2duo -usb -sdl -soundhw sb16,ac97 -vga vmware
+
+# For VirtualBox
+# sudo vboxmanage internalcommands createrawvmdk \
+# -filename ~/LunOS.vmdk -rawdisk /dev/sdX
+# sudo virtualbox
+# Then configure your computer accordingly
+#
+
+
+
+

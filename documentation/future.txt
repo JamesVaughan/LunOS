@@ -1,0 +1,81 @@
+Future
+
+New desires
+	Ubicomp
+	Internet scale computing
+	Data intensive supercomputing
+
+New technologies
+	flash-based disk drives
+	Flash replacement: Phase change memory (PCM)
+	Multi-threaded multi-core processors
+	Better tools for handling complexity
+	
+Ubicomp
+	Computers are all over the place, but they're just part of the environment, not really in your face
+	Lots of ongoing projects
+		Aura(CMU), Oxygen(MIT), Endeavor(UBC), etc . . .
+	Lots of interesting challenges
+		low power and power management
+		wireless networking
+		real-time and on-time services
+		computation and data migration
+		addressing information overload
+		security and privacy!
+	
+Internet wide computing
+	Video conferencing and other forms of communicatiokln
+	Grid computing
+	Peer to peer lookup and storage systems
+	PDA and other forms of remote information access
+	Lots of projects
+	Lots of interesting challenges
+		resource discovery and selection
+		person location
+		data and/or computation survival and migration
+		cost/benefit models
+		security, privacy, and fighting denial of service attacks
+		
+Data Intensive Supercomputing
+	Large scale computer centred around data
+		Collecting maintaining indexing computing
+	Think google-style computing
+		millions of processors in local area clusters
+		Comodity parts, reliability depends on redundancy and management
+		partitioned workload
+	Lots of examples of problems that fir this model
+	Bit challenge is moving to data
+		1TB is cheap to store, hard to move
+New technologies
+	Chanding technology requires changes in system management
+	Moore's Law
+		faster CPU, more memory, more storage, more bandwidth
+	Shared memory parallel computing becomes mainstream
+		Renewed interest in efficient synchronization, parallel scheduling, distributed shared memory
+	Better wireless technologies, smaller devices
+		Ubicomp vision becoming realistic
+	Changes in storage technology
+		Cheap, fast non-volatile storage simplifies many file system programs
+		
+Better tools
+	Project AURA
+		The most precious resource in computer system is no longer its processor, memory, disk or network.
+			It is user attention
+	Complexity of systems continues to grow, human ability to handle complexity does not
+		Need better languages to specify and check concurrent programs
+		Automatic extraction of rules from code, and verification that rules are followed
+		Automatic diagnosis and recovers from errors
+		Reduction to less complex systems
+
+
+
+
+Non-programmable calculators will be allowed
+Covers lecture 12 to 22 security
+roughtly same weight per lecture
+Expect mix of applications, knowledge and thinking questions
+	Application
+	Knowledge
+	Thinking
+Wil have more thinking / less pure knowledge last year
+	

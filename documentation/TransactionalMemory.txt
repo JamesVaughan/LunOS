@@ -1,0 +1,125 @@
+Transactional Memory
+----[here there be dragons]----
+
+There are two major issues.
+	Performance
+		Scalability
+		Base Cost
+		We've looked at some technques
+			Better spinlocks
+			Lockless strategies
+	Programmability
+		Locks are hard to use correctly
+		Lockless data strucutres are hard to design
+
+What is missing?
+	We don't have good support for
+		Abstraction
+			Hide internal details
+		Composition
+			Ability to take a series of operations
+			 and stick them together to
+			 build something more complicated
+			 
+"Magic Wish List"
+	Let programmers express what they want to happen
+	Let run-time system or hardware support to make it happen
+	Allow abstractions to hide the implementation and be
+	 composable
+ 	A new programming model
+ 	
+ Database Transactions
+ 	Database sstems allow multiple queries to run in parallel
+ 	Query authors don't worry about concurrency
+ 	Complex Queries are composed to smaller simpler ones
+ 	Key programming Model:
+ 		A transation executres as if it were the oinly computatuibj accessing the database
+ 		Atomic - all updates become visible, or none
+ 		Consistent - transations leave database in consistent state
+ 		Isolated - no interference with or from other transactions
+ 		Durable	- once commited, updates are permanent
+ 		
+ Transactional Memory
+ 	Programmer specifies the program and where shared data access occures
+ 	We do that by writing atomic {}
+ 	1)The system needs to create a checkpoint
+ 	2)At the end i needs to detect conflicts
+ 	3)Commits or aborts and re-executes
+ 	
+ Differences from DB Transactions
+ 	Memory VS Disk
+ 		Disk access takes 100x longer than a memory access.
+ 		Databases can use a relatively heavy-weight software solutions
+ 	No need for durability
+ 		Memory is transient anyways
+ 	Existing languages, libraries and systems
+ 		Databases are closed systems in which all code executes
+ 		as a transation, programs using TM must coexist with
+ 		libraries, OSs that do not
+ 
+ TM Implementations
+ 	Hardware TM (HTM)
+ 		Changes to computer systems and ISA
+ 		Extra cashe to buffer writes, extended coherence protocol
+ 		 to help track conflicts
+ 		Support for limited number of memory locations
+ 	Software TM (STM)
+ 		Language runtime + extensions to specify trans.
+ 		Exploit current commodity hardware
+ 		Get experience with transactional programming model
+ 		Java: DSTM, ASTM
+ 		C/C++: McRT-STM, TL2, RSTM
+ 	Hybrid TM (Hy TM)
+ 
+ Programming Constructs
+ 	Atomic BLock
+ 	Delimits code that should execute in a transation
+ 	Dynamically-scoped - in code foo executes in transaction as well
+ 	Does no name shared resources (unline monitors or lock-based programming)
+ 	3 possible outcomes - commits, aborts, non-termination
+ 	
+Semantics
+	Not formally specified
+	Useful ways to reason about TM:
+		Database correctness criteria: serializability
+			Useful for understanding transaction behaviour
+		Operational semantics - single-lock atomicity
+			Program executes as if all atomic blocks were
+			protected by a single global lock.
+			Does not capture failure atomicity
+			Can describe effect of non-transactional accesses
+				Conflict and data race concepts from lock-based
+				programming
+				
+Additional Considerations
+	Weak VS Strong Atomicity
+		Weak - conflicting memory reference outside transation
+		Strong - all operations outside atomic blocks are converted into individual transations, guaranteeing all accesses obey TM protecols
+	Nested transations - required from composability
+		Flattened - inner transaction essentially removed
+		Closed - effect of inner transation only visible to
+			surrounding one; about affects only inner
+		Open - effect of inner becomes visiable to all after commit;
+			aborts affects only inner
+
+Implementation Basics
+	For all write instructions
+		Track write addresses and values
+	Read instructions
+		Track read addresses and values
+	When a transaction completes
+		Atomically
+			Validate the read set [conflict detection]
+			Commit write set
+
+Options
+	Transation Granularity
+		Unit of storage over which TM system detects conflicts
+		Akin to notion of cashe coherence
+		Word or block typical for HTM
+	Direct or Deferred Update
+		Direct - transaction directly modifies the object
+			itself
+				Must log previous value for undo
+		Deferred - modify private copy, propagate at commit
+		Both get complicated

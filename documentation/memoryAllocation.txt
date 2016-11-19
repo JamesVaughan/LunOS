@@ -1,0 +1,86 @@
+When you do malloc or free you get back a block of memory that you can use.
+
+struct foo{
+...
+};
+
+struct foo* cat = malloc(sizeof(struct foo));
+
+free(cat);
+
+Puts the space back on the heap.
+
+The heap looks like
+
+{___|ffffff|_____|fffff|_______________________}
+
+We actually always allocate more memory than the program asks for.  We do this
+to store the size of the allocation.
+
+[size|sizeof(X)]
+
+The pointer we return is at the point of sizeof(X).
+
+CMU malloc basically does this.
+
+Each of the free blocks on the stack has a pointer to the previous and the next.
+
+So the smallest size of a block is 16 bytes.
+
+KHEAP allocator [Kernel heap from OS161]
+
+Has different size classes for different memory sizes.
+
+pageref
+	-Address of the page
+	-Sizeof page
+	-freeCount [are their any free blocks for this size class]
+	-next [pointer to the next pageref list]
+
+Fresh-Refs
+
+sizebases
+	-9 different size classes
+		-Link page refs to the sizebase list on the size class
+	-On free it has to search everything to find what size it was part of.
+	
+--------------------------------------------------------------------------------
+
+False Sharing
+	-When 2 CPU's are writing to the same cache line.
+	- Pentium's like is 1028 bytes
+	
+-------------------------------------------------------------------------------
+Paralell HEAP
+
+1) Single Heap
+	a) Single Serial Heap
+		- Poor scalability [Global Lock]
+		- Active False Sharing
+		+ low fragmentation
+		+ fast
+	b) Concurrent Heap
+		- Concurrent B-Tree
+		- lock-per-size class [Finer grain locking]
+		- lock per free block
+		- active false sharing
+
+2) Multiple Heaps
+	a) Pure Private Heap - Was used in STL [May still be]
+		- each thread allocates/frees to own heap
+		- unbounded memory consumption [producer allocated, collector frees]
+		+ no active false sharing
+		- passive false sharing
+	b) Private Heap with ownership
+		-just like "a" except
+		- block are freed back to the heap they came from
+		- You can store a pointer to the heap where it was allocated
+		- or play some tricks with bitmasking to learn where it came from
+		- Fragmentation O(P)
+	c) Private Heap with Threshold + Global Heap :)
+		- Global pool of memory and each thread has a per CPU of memory
+		- When freeing you send data back to the global heap to
+			make sure that you are not going to use excessive ammounts
+			of private memory.
+		- 
+		

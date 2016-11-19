@@ -1,0 +1,102 @@
+Distributed Consensus
+
+Distributed Algorithms
+	Safety
+		Means that some aprticular bad thing never happens
+	Liveness
+		Indicates that some particular good thing will eventually happen
+	Timing/failure assumptions affect how we reason abou these properties and what we can prove about them.
+
+Timing Model
+	Many gradations:
+		Synchronous
+			there exists a bound
+		Asynchronous
+			There is no bound
+Synchronous timing assumption
+	processes share a clock
+	time-stamps men something between processes
+	Communication can be guaranteed to occure in some number of clock cycles
+	
+	
+Partial Synchrony Assumption
+	Timing-based distributed algorithms
+	Processes have some information about time
+		clocks that are synchronized within some bound
+		
+		
+Failure Model
+	A process that behaves according to its IO spec throughout its execution is called correct
+	a process that deviates from its specification is called a failure
+	Specific types of errors are listed as failure assumptions
+		Communication link might loose messages
+	
+Fail-Stop failure
+	Crash failure
+	p works correctly until point of failure
+
+	p does not send any more messages
+	p does not perform actions when messages are sent to it
+	other priocesses can detect that p has failed
+
+
+Fault/failure detectors
+	A perfect failure detector
+		no false positives
+		eventually reports failures to all processes
+	Heartbeat protocols
+		assumes partial synchronous environment
+		Processes send I'm alive messages to all o hter processes regularly
+		If process i does not hear from j in a certain interval 
+		"T = Tdelivery + Theartbeat" then it determines that j has failed.
+		Depends on Tdelivery being known and accurate
+		
+Ommission failure
+	process fails to send, receive incoming messages, or to handle incoming messages.
+Timing failure
+	processes' responce kies outside specified time interval
+Responce failure
+	Value of responce is incorrect
+
+
+Byzantine failure
+	Process p fails in an arbitrary manner
+	P is modeled as malevolent entity
+		can send the messages and perform the actions that woll have the worst possible effect.
+	Common constraints on Byzantine assumpotion
+		no complete knowledge of the global state
+	Limited ability to co-ordinate
+	Restricted to polnomyle P != NP.
+	
+	
+Distributed Consensus
+	N process
+	We need at least 3f+1 working nodes, where f is the number of failures.
+	
+Problem
+	Lots of messages required to handle even 1 faulty process
+	Need min 4 processes to handle 1 fault, 7 to handel 2 faults
+	If we use signed messages, instead of oral messages, can handle f faults with 2f+1
+		Simple majority requirement
+		Still lots of messages sent through, plus cost of signing
+	Fail-Stop/Byzantine -> IMPOSSIBLE
+	Fischer, Lynch and Patterson (FLP) impossibility result
+		Asynchronous assumption makes it impossible to differentiate between failed and slow processes
+		Therefore no termination.....
+
+Castro: Practical Byz. Fault Tolerance
+	Uses various optimizations to combine messages, reduce total communication
+	Relies on partially synchronous assumption to guarantee liveness
+	Therefore attacks on system can only slow it down - safety is guaranteed
+	Assumes that an attack on liveness can be dealt with in a reasonable amount of time
+	Suitable for wide area deployment
+	Being used in Microsoft Research's Farsite distributed file system
+	
+Partially Synchronous Consensus Algos
+	Relies on a fault-detector
+	Synchronous/fail-stop distribution consensus algorithms can be transformed to run in the partially synchronous environment
+	Byzantine is still a problem though
+		DoS attacks on correct processes result in the identification of correct processes as failed
+		reducing the nyumber of processes required for taking over the system.
+	
+	

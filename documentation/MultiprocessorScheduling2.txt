@@ -1,0 +1,86 @@
+Multiprocessor Scheduling II
+
+Parallel Job Scheduling
+	Recall threads in a parallel job are not independent.
+		Scheduling them as if they were leads to performance problems
+	Forms of scheduler-awareness
+		Know the threads are related, schedule all at same time
+		Know when threads hold spinlocks and don't deschedule lock holder
+		Know about general dependences
+		
+Using Thread Relations
+	Space Sharing
+		At job creation, specify number of threads
+		Scheduler finds set of CPUs
+	How should scheduler choose job to assign to CPUs?
+	What is optimal (in terms of average wait time)?
+		Uniprocessor scheduling -> shorted job first
+		MP version -> smallest expected number of CPU cycles
+			FCFS with backfilling is hard to beat
+			Backfilling requires stimates of runtime which
+			 could be used to implement MP version of SJF
+		
+Estimating Runtime
+	Estimates typically come from users who submit the jobs
+		Low estimates make it easier to do backfilling
+		But cause trouble with reservations if not accurate!
+		Soln: kill jobs that exceed estimate
+	How accurate are user estimates?
+	Can automatic estimates based on history do better?
+	How much does it matter?
+	
+Parallel Time Sharing
+	Each CPU may run threads from multiple jobs
+		But with awareness of jobs
+	Co-scheduling
+		Identify working set of processes (analogous to working set of memory pages) that need to run together
+	Gang scheduling
+		All-or-nothing -> co-scheduled working set is all theads in the job
+		Get scheduling benefits of dedicated machine
+		Allows all jobs to get service
+		2-D Bin packing problem to fill available CPU slots with runnable jobs
+		Issues:
+			All CPUs must context switch together
+				To avoid fragmentation, construct groups of jobs that
+				 fill a slow on each CPU	
+				Inflexible
+				
+Knowing about Spinlocks
+	Threads acquiring spinlocks sets kernel-visible flag
+	Clears the flag on release
+	Scheduler will not immediatly deschedule a thread with the flag set
+		Gives thread a chance to complete a critical section and release lock
+ 		 Spinlock-protected critical sections are supposed to be short
+		Does not defer scheduling indefinitely
+		
+Knowing General Dependences
+	Implicit CoScheduling
+	Designed for a workstation cluster environment
+		Explicit messages for all communication/sync
+		Much more expensive if remote process is not running when local process needs to synchronize
+	Comunicating processes decide when it is beneficial to run
+		Infer remote state vy observing local events
+			message round trip time
+			message arrival
+	Local scheduler uses communication info in calculating priority
+	
+OS Noise
+	OR: how to schedule OS activities
+	Massively parallel systems are typically split into IO nodes, management nodes and compute nodes
+		Compute nodes are where real work gets done
+		Run customized, lightweight kernel on compute nodes
+		run full-blown OS on IO nodes and mgmt nodes
+		WHY???
+	Asynchronous OS activities perturv nice scheduling properties of running jobs together
+		Up to a factor of 2 performance loss in real large-scale jobs
+		Need to either eliminate OS interference, or find ways to coordinate it as well
+
+Announcement:
+To use the timing server: send an e-mail to demke@cdf
+Subject: malloc.c
+Attachment: malloc.c
+Mailed back to me: resaults.tgz
+
+Larson sets up lists of allocated blocks and waits for a time period (now 15 seconds).
+Each thread does a bunch of allocates and frees.
+BA2139 -> midterm

@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\DataStructures">
+      <UniqueIdentifier>{193adf89-61e7-4da9-8833-12a03d79dd11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{5646c50d-ce7e-443b-b31e-c6c37f7fc245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{78f98d08-3e05-4f14-8184-758dbebdd580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{285c4a0a-04e1-443b-a562-a20dbff5372d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kern">
+      <UniqueIdentifier>{aa4980eb-4797-434c-8c90-b8f54756c4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Threading">
+      <UniqueIdentifier>{b0de49dd-108c-4bd9-8fbd-48dfa9ea0075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kern\io">
+      <UniqueIdentifier>{f5eddd6a-da8a-4f98-ade5-86fa0b0bc1a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{c716d67a-11a3-4823-bf47-e2134617ba68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{6c6f3fdf-c81e-4fb1-a5f5-7a8bd8e10e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\io">
+      <UniqueIdentifier>{1c91c15d-671f-4e75-ab45-7ab2c4b48cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\kern">
+      <UniqueIdentifier>{eabca5db-e46b-485f-b67a-4ef6f52d3dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Threading">
+      <UniqueIdentifier>{17e3608d-affc-4961-be7a-02ae1a49e99d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\kern\io">
+      <UniqueIdentifier>{8af14e2d-5806-4aff-b1d7-e63d9661996c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Stdlib">
+      <UniqueIdentifier>{ae76a43e-52cf-4f39-9b6b-2b2c3d3a852f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Minesweeper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prompt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\synchronization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SystemCalls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\BMP.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Font.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Button.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI\Component.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\DiskAccess.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\Fat32.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\FileSystem.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\Graphics.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\Keyboard.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\Mouse.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\PCIStream.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\ResourceHandle.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\Stream.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\TextReader.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\Apic.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\console.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\gdt.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\idt.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\irq.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\isrs.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\kb.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\linkedList.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\main.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\maxheap.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\memory.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\powerManagement.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\process.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\scheduler.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\scheduler2.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\string.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\system.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\timer.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\user.cpp">
+      <Filter>Source Files\kern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\dma.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\hdd.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\io.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\isa.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\mouse.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\pci.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\sata.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\vesa.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kern\io\vga.cpp">
+      <Filter>Source Files\kern\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Threading\Tasks.cpp">
+      <Filter>Source Files\Threading</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\kern\io\pci.asm">
+      <Filter>Source Files\kern\io</Filter>
+    </None>
+    <None Include="build.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="link.ld">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Makefile">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="start.asm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ExecuteFromPS.ps1">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\IOCalls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LunOS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Minesweeper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\prompt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Stdlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\synchronization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SysCall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SystemCalls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\BMP.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Font.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI\Button.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI\Component.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI\Container.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI\GUI.hpp">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\DiskAccess.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Fat32.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\FileSystem.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Graphics.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Io.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Keyboard.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Mouse.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Pci.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\ResourceHandle.hpp">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\Stream.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\io\TextReader.h">
+      <Filter>Header Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\Apic.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\console.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\core.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\grub.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\keyboard.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\linkedList.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\maxheap.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\memory.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\powerManagement.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\process.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\process.hpp">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\scheduler.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\scheduler.hpp">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\system.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\system.hpp">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\user.h">
+      <Filter>Header Files\kern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\dma.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\HardDrive.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\io.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\isa.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\mouse.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\pci.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\Sata.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\vesa.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\kern\io\vga.h">
+      <Filter>Header Files\kern\io</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Threading\Tasks.hpp">
+      <Filter>Header Files\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Stdlib\StdLib.hpp">
+      <Filter>Header Files\Stdlib</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

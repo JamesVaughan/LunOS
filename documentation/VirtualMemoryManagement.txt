@@ -1,0 +1,61 @@
+Memory Management Requirements:
+	Relocation:
+		Pogrammers don't know what physical memory will be available when their programs run
+			need some type of address translation
+	Protection
+		A proccess' memory should be protected from unwanted access by other resources.
+		Requires hardware support
+	Sharing
+		Needs ways to specify and control what sharing is allowed
+	Logical/Physical Orgnization
+		Map between program strucutres and linear array of bytes
+		Manage transfers between disk and main memory
+
+Clustered page tables:
+	Similar to hashed page tables
+		Each entry stores mapping information for several consecutive pages with a single key
+		Hashed page tables with subblocking
+		
+------------SuperPages------------------
+Overview
+	Increasing cost in TLB miss overhead
+		Growing working sets
+		TLB size does not grow at same pace
+	Processors now provide superpages
+		one TLB entry can map a large region
+	OS's have been slow to harness them
+		no transparent superpage support for apps
+		
+TLB coverage Trend
+	TLB coverage as percentage of memory has a 1000 decrease in 15 years
+How to increase the coverage
+	Typical TLB coverage ish 1 mb
+	Use Superapages
+		Both large and smal pages -power of 2 size
+		1 TLB entry per superpage
+		Contiguous, and virtually and physically aligned
+		Uniform attributes
+	Benefit: Increased TLB coverage
+		no increase in TLB size
+		no internal fragmentation (if we do it carefully)
+		
+Problems with superPages
+	Main Issues
+		Allocation
+		Promotion
+		Demotion
+		Fragmentation
+		
+Design of Navarro et al.
+	Uses preemptible reservations
+		When you get a fault on one page that might be part of a super page make a resurvation aligned to a super page
+			How much do we reserve? and how do we make a decision?
+			How do we reduce internal fragmentation?
+		Key Observation
+			Once an application touches the first page of a memory object,
+				then it is likely going to touch every page of that object.
+			Create super pages as large as possible and as early as possible
+			
+www.cs.rice.edu/~jnavarro/superpages
+
+Linux effort is underway, however it is complicated b the linux page table design
