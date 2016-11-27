@@ -30,6 +30,7 @@ all:
 	@echo Assembling the assembly base
 	@nasm -f aout -o $(KB)start.o start.asm
 	@nasm -f aout -o $(KBIO)pciIO.o $(KSIO)pci.asm
+	@nasm -f aout -o $(KB)FP.o $(KS)FP.asm
 
 	@echo Compiling C/C++
 	@$(OPTIMIZEDCOMPILE) $(KB)main.o $(KS)main.cpp
@@ -82,7 +83,7 @@ all:
 	@#linking files
 	@ld -melf_i386 -T link.ld -o kernel.elf $(KB)start.o $(KB)main.o $(KB)gdt.o \
 	 $(KB)idt.o $(KB)isrs.o $(KB)irq.o $(KB)memory.o $(KB)scheduler.o $(KB)timer.o \
-	 ${KB}Apic.o \
+	 ${KB}Apic.o $(KB)FP.o\
 	 $(KB)kb.o  $(KBIO)mouse.o $(KB)console.o $(KB)string.o $(KB)maxheap.o $(KB)process.o\
 	 $(KB)linkedList.o \
 	 $(KB)user.o $(KB)powerManagement.o $(KB)system.o  \

@@ -28,6 +28,7 @@ namespace IO
 		bool IsOpen;
 	private:
 		unsigned int StreamLockData;
+		bool Disposed;
 	};
 }
 }

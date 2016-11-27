@@ -6,6 +6,7 @@
  */
 
 #include <io/Stream.h>
+#include <kern/console.h>
 #include <SysCall.h>
 
 using namespace LunOS::IO;
@@ -21,13 +22,13 @@ Stream::Stream(unsigned int deviceNumber, unsigned int bufferSize) : streamLock(
 {
 	unsigned int buffer;
 	unsigned int size = sizeof(unsigned int);
-	System::Call(255,deviceNumber,(unsigned char*)&buffer,size); // this opens a stream to the new device
-
+	System::Call(255, deviceNumber, (unsigned char*)&buffer, size); // this opens a stream to the new device
+	this->Disposed = false;
 	this->fd = buffer;
 	this->IsOpen = (fd != 255);
 	this->position = 0;
 	this->length = 0;
-	if(this->IsOpen)
+	if (this->IsOpen)
 	{
 		unsigned int i, ints = bufferSize / sizeof(unsigned int), remainder = bufferSize % sizeof(unsigned int);
 
@@ -35,20 +36,20 @@ Stream::Stream(unsigned int deviceNumber, unsigned int bufferSize) : streamLock(
 		unsigned int *pos = (unsigned int*)this->buffer;
 		this->bufferLength = bufferSize;
 		// Zero out the buffer
-		if(bufferLength > sizeof(unsigned int))
+		if (bufferLength > sizeof(unsigned int))
 		{
-			for(i = 0; i < ints; i++)
+			for (i = 0; i < ints; i++)
 			{
 				*(pos++) = 0;
 			}
-			for(i = 0; i < remainder; i++)
+			for (i = 0; i < remainder; i++)
 			{
 				this->buffer[i - bufferSize - 1] = 0;
 			}
 		}
 		else
 		{
-			for(i = 0; i < bufferSize; i++)
+			for (i = 0; i < bufferSize; i++)
 			{
 				this->buffer[i] = 0;
 			}
@@ -71,46 +72,51 @@ Stream::Stream(Stream* stream)
 	this->position = 0; // we have a different position in the stream
 	this->IsOpen = stream->IsOpen;
 	this->streamLock.BindAddresses(&stream->streamLock);
+	this->Disposed = false;
 	stream->streamLock.Release();
 }
 
 Stream::~Stream()
 {
-
+	this->Disposed = true;
 }
 
 void Stream::Close()
 {
-	this->streamLock.GetLock();
-	if(this->IsOpen)
+	if (!this->Disposed)
 	{
-		this->Write(); // make sure everything has been written
-		this->IsOpen = false;
-		System::Call(this->fd,StreamClose,NULL,NULL);
-		this->bufferLength = 0;
-		delete this->buffer;
-		this->buffer = NULL;
+		this->streamLock.GetLock();
+		if (this->IsOpen)
+		{
+			this->Write(); // make sure everything has been written
+			this->IsOpen = false;
+			System::Call(this->fd, StreamClose, NULL, NULL);
+			this->bufferLength = 0;
+			delete this->buffer;
+			this->buffer = NULL;
+		}
+		this->Disposed = true;
+		delete this;
 	}
-	delete this;
 }
 
 void Stream::Write()
 {
 	bool gotLock;
 	// check to see if the lock is already had, everything calling this must have tried to have already gotten it
-	if(this->position == 0) return; // if there is nothing to write just skip it
+	if (this->position == 0) return; // if there is nothing to write just skip it
 	gotLock = this->streamLock.TryLock();
-	System::Call(this->fd,StreamWrite,(this->buffer), this->position);
+	System::Call(this->fd, StreamWrite, (this->buffer), this->position);
 	this->position = 0;
-	if(gotLock) this->streamLock.Release();
+	if (gotLock) this->streamLock.Release();
 }
 
 void Stream::Read()
 {
 	bool gotLock = this->streamLock.TryLock();
 	unsigned int ammount = this->length - this->position;
-	System::Call(this->fd,StreamRead,(this->buffer + this->position), ammount);
-	if(gotLock)this->streamLock.Release();
+	System::Call(this->fd, StreamRead, (this->buffer + this->position), ammount);
+	if (gotLock)this->streamLock.Release();
 }
 
 void Stream::Read(unsigned int ammount)
@@ -118,8 +124,8 @@ void Stream::Read(unsigned int ammount)
 	bool gotLock = this->streamLock.TryLock();
 	this->length = this->position + ammount;
 	ammount = this->length - this->position - ammount > 0 ? ammount : this->length - this->position;
-	System::Call(this->fd,StreamRead,(this->buffer), ammount);
-	if(gotLock)this->streamLock.Release();
+	System::Call(this->fd, StreamRead, (this->buffer), ammount);
+	if (gotLock)this->streamLock.Release();
 
 }
 

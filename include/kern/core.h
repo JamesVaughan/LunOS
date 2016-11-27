@@ -56,6 +56,13 @@ extern void timer_wait(int ticks);
 extern void timer_install();
 extern volatile unsigned int timer_ticks;
 
+/*FP.asm*/
+extern "C"
+{
+	extern unsigned int LoadSSEStatus(void);
+	extern void StoreSSEStatus(unsigned int newStatus);
+}
+
 extern "C"
 {
 	extern unsigned int GetCPUID(unsigned int call, unsigned int*a, unsigned int*d);

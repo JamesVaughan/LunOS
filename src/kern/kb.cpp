@@ -83,7 +83,6 @@ void keyboard_handler(struct regs *r)
     unsigned char scancode;
     scancode = inportb(0x60);
     unsigned char maskedCode = (scancode & ~0x80);
-
     if(bufferPosition < 128)
     {
 		if(maskedCode < 128)
@@ -127,7 +126,7 @@ namespace KEYBOARDSPACE
 {
 	bool Read(FDTEntry* fdt, unsigned char* buffer, size_t length)
 	{
-		KeyboardLock->GetLock();
+		//KeyboardLock->GetLock();
 		switch(buffer[0])
 		{
 		// Get Key

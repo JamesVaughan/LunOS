@@ -869,9 +869,9 @@ void TestDiskAccess(int argc, unsigned char** argv)
 void MouseTestApp()
 {
 	using namespace LunOS::IO;
+	KeyEvent event;
 	Mouse* mouse = Mouse::GetMouseStream();
 	Keyboard* keyboard = Keyboard::GetKeyboardStream();
-	KeyEvent event;
 	while ((event = keyboard->TryReadKey()).type != KEY_DOWN)
 	{
 		MouseStatus status = mouse->GetStatus();
@@ -881,6 +881,7 @@ void MouseTestApp()
 				status.Buttons[2] ? "true" : "false", status.X, status.Y);
 		LunOS::System::Sleep(50);
 	}
+	keyboard->Close();
 	mouse->Close();
 }
 
@@ -1014,6 +1015,7 @@ void Prompt(void* unusedParam)
 	const char* userName = LunOS::System::GetUserName(uid);
 	printf("%2Loaded Lunos version-%s\n", version);
 	printf("Running under user %2%s %1id %2%i\n", userName, uid);
+	printf("SSE Status = %20x%x\n", LoadSSEStatus());
 	//LunOS::Apic::PrintInformation();
 	// we need to do this since we already drew to the screen before the command prompt has run
 	commandPrompt.ResetPosition();
@@ -1169,7 +1171,6 @@ void System::IncommingInterrupt(struct regs* r)
 					(LunOS::IO::DeviceInfo*) localDataPointer);
 			break;
 		default:
-
 			break;
 		}
 	}

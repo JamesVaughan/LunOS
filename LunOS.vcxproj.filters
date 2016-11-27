@@ -219,6 +219,9 @@
     <None Include=".gitignore">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="src\kern\FP.asm">
+      <Filter>Source Files\kern</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IOCalls.h">

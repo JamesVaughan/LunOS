@@ -14,15 +14,20 @@ int MouseDriver::Y = 0;
 
 bool MouseDriver::Button[5];
 
-void MouseDriver::Wait(bool data)
+void TimeoutWait(bool data)
 {
 	int timeout = 10000;
-	while(timeout > 0)
+	while (timeout > 0)
 	{
 		unsigned char status = inportb(0x64);
-		if(data ? ((status & 0x1) == 1) : ((status & 0x2) == 0)) break;
+		if (data ? ((status & 0x1) == 1) : ((status & 0x2) == 0)) break;
 		timeout--;
 	}
+}
+
+void MouseDriver::Wait(bool data)
+{
+	TimeoutWait(data);
 }
 
 void MouseDriver::Write(unsigned char data)
@@ -39,40 +44,18 @@ unsigned char MouseDriver::Read()
 	return inportb(0x60);
 }
 
+unsigned char ReadStatus()
+{
+	const unsigned short CommandPort = 0x64;
+	outportb(CommandPort, 0x20);
+	TimeoutWait(true);
+	return inportb(CommandPort);
+}
+
 void MouseDriver::Init()
 {
-	// Now we can turn the mouse on
-	int status;
-
-	Wait(false);
-	outportb(0x64, 0xa8); // let the ps/2 controller know that we want to access the mouse
-
-	Wait(false);
-	outportb(0x64, 0x20);
-
-	Wait(true);
-	status = (inportb(0x64) | 0x43) & ~0x10;
-
-	Wait(false);
-	outportb(0x64, 0x60);
-
-	Wait(false);
-	outportb(0x60, status);
-
-	Wait(false);
-	Write(0xF6); // Use default settings
-	Read(); // Get the Ack
-
-	//Wait(false);
-	//Write(0xF2);
-	//MouseDriver::LastMessage = Read() > 0 ? 4 : 3;
-
-	Write(0xF4);
-	Read(); // Get the Ack
-
-	// Re-enable the keyboard
-	outportb(0x61, inportb(0x61) & 0x7F);
-
+	const unsigned short DataPort = 0x60;
+	const unsigned short CommandPort = 0x64;
 	MouseDriver::MessagePosition = 0;
 	MouseDriver::Message[0] = 0;
 	MouseDriver::Message[1] = 0;
@@ -84,8 +67,25 @@ void MouseDriver::Init()
 	MouseDriver::Button[4] = false;
 	MouseDriver::LastMessage = 3;
 
+	unsigned char status = 0x0;
+	
+	//Enable the second PS/2 channel
+	/*outportb(CommandPort, 0xA8);
+	Wait(false);
 	// lets us handle IRQ12 for mouse operation
 	irq_install_handler(12, InterruptHandler);
+	// enable IRQ for both
+	status = ReadStatus();
+	printf("Initial Status = %20x%x\n", status);
+	outportb(CommandPort, 0x60);
+	Wait(false);
+	status |= 0x3;
+	outportb(DataPort, status);
+	Wait(false);
+	status = ReadStatus();
+	printf("Post-Status = %20x%x\n", status);
+	*/
+
 	// Now install a Mouse Driver
 	Device us;
 	us.AWrite = NULL;
@@ -103,6 +103,7 @@ void MouseDriver::Init()
 
 void MouseDriver::InterruptHandler(struct regs* r)
 {
+	printf("IRQ12\n");
 	// This gets called when something triggers IRQ12 (the mouse IRQ)
 	unsigned char input = inportb(0x60);
 	//if(input > 0xF0) return;
