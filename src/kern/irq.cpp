@@ -113,6 +113,8 @@ void RestoreRegisters(struct regs* r){
 	Thread* activeThread = Sched->GetActiveThread();
 	struct regs registers = activeThread->CalledStack.PoP();
 	memcpy(r,(unsigned char*)&registers,sizeof(struct regs));
+	//sseRegs fxsave_region = activeThread->CalledStackSSE.PoP();
+	//asm volatile(" fxrstor %0; "::"m"(fxsave_region.fxsave_region));
 }
 
 extern "C"{

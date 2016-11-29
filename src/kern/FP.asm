@@ -21,3 +21,14 @@ StoreSSEStatus:
 	LDMXCSR dword[ebp + 8]
 	pop ebp
 retn
+
+global fxSave
+fxSave:
+	push ebp
+	mov ebp, esp
+	push eax
+	mov eax, [ebp + 8]
+	fxsave [eax]
+	pop eax
+	pop ebp
+retn

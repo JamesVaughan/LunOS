@@ -885,7 +885,7 @@ void MouseTestApp()
 	mouse->Close();
 }
 
-const char* version = "0.05.04";
+const char* version = "0.05.06";
 void Prompt(void* unusedParam)
 {
 	CommandPrompt commandPrompt;

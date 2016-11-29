@@ -67,6 +67,7 @@ class Thread
 	Process* GetProcess();
 	~Thread();
 	LunOS::DataStructures::FixedStack<struct regs> CalledStack;
+	LunOS::DataStructures::FixedStack<struct sseRegs> CalledStackSSE;
 };
 
 

@@ -349,7 +349,10 @@ void Scheduler::SaveRegisters(struct regs* r)
 	if(active)
 	{
 		Thread* current = (Thread*)active->data;
+		//sseRegs fxsave_region;
+		//asm volatile(" fxsave %0; "::"m"(fxsave_region.fxsave_region));
 		current->CalledStack.Push(*r);
+		//current->CalledStackSSE.Push(fxsave_region);
 	}
 	else
 	{

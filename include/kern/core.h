@@ -12,7 +12,8 @@ typedef struct regs
     volatile unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;
     volatile unsigned int int_no, err_code;
     volatile unsigned int eip, cs, eflags;
-}__attribute__((packed)) regs ;
+}__attribute__((packed)) regs;
+
 
 /* MAIN.C */
 extern void *memcpy(void *dest, const void *src, size_t count);
@@ -59,8 +60,15 @@ extern volatile unsigned int timer_ticks;
 /*FP.asm*/
 extern "C"
 {
+	typedef struct sseRegs
+	{
+		char fxsave_region[512 + 16];
+	}__attribute__((aligned(16))) sseRegs;
+
 	extern unsigned int LoadSSEStatus(void);
 	extern void StoreSSEStatus(unsigned int newStatus);
+	// 16-bit aligned address to store the floating point variables.
+	extern void fxSave(char* address);
 }
 
 extern "C"

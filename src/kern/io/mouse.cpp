@@ -54,8 +54,8 @@ unsigned char ReadStatus()
 
 void MouseDriver::Init()
 {
-	const unsigned short DataPort = 0x60;
-	const unsigned short CommandPort = 0x64;
+	//const unsigned short DataPort = 0x60;
+	//const unsigned short CommandPort = 0x64;
 	MouseDriver::MessagePosition = 0;
 	MouseDriver::Message[0] = 0;
 	MouseDriver::Message[1] = 0;
@@ -67,7 +67,7 @@ void MouseDriver::Init()
 	MouseDriver::Button[4] = false;
 	MouseDriver::LastMessage = 3;
 
-	unsigned char status = 0x0;
+	//unsigned char status = 0x0;
 	
 	//Enable the second PS/2 channel
 	/*outportb(CommandPort, 0xA8);

@@ -51,8 +51,10 @@ void ThreadDeath(Thread* us)
 	LunOS::System::KillThread();
 }
 
+
+
 Thread::Thread(unsigned char* name, Process* proc, unsigned int Start, unsigned char* stack, unsigned int stackSize, void* param)
-: CalledStack((unsigned int)16)
+: CalledStack((unsigned int)16), CalledStackSSE((unsigned int)16)
 {
 	int i;
 	if(name != NULL)
@@ -75,6 +77,12 @@ Thread::Thread(unsigned char* name, Process* proc, unsigned int Start, unsigned 
 	// we need to buffer up a bit of space in our stack
 	this->inKernelCall = false;
 	struct regs registers;
+	sseRegs sseRegisters;
+	auto addr = (unsigned int)sseRegisters.fxsave_region;
+	addr = addr + (16 - ((addr + 16) % 16));
+	printf("%20x%x\n", addr);
+	fxSave((char*)addr);
+	this->CalledStackSSE.Push(sseRegisters);
 	registers.cs = 0x08;
 	registers.ds =  registers.es  = registers.fs  =  registers.gs = 0x10;
 	registers.eax = registers.ebx = registers.ecx =  registers.edx = 0x00;
