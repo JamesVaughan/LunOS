@@ -113,8 +113,17 @@ void RestoreRegisters(struct regs* r){
 	Thread* activeThread = Sched->GetActiveThread();
 	struct regs registers = activeThread->CalledStack.PoP();
 	memcpy(r,(unsigned char*)&registers,sizeof(struct regs));
-	//sseRegs fxsave_region = activeThread->CalledStackSSE.PoP();
-	//asm volatile(" fxrstor %0; "::"m"(fxsave_region.fxsave_region));
+	sseRegs sseRegisters = activeThread->CalledStackSSE.PoP();
+	auto addr = (unsigned int)sseRegisters.fxsave_region;
+	auto offset = (16 - ((addr + 16) % 16));
+	// check to see if we were lucky and got aligned in the same space
+	if (offset != sseRegisters.Offset)
+	{
+		// we were not lucky, we need to shift the RAM around
+		memcpy((char*)(addr + offset), (char*)(addr + sseRegisters.Offset), 512);
+	}
+	addr = addr + (16 - ((addr + 16) % 16));
+	fxStore((char*)addr);
 }
 
 extern "C"{

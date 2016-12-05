@@ -62,6 +62,7 @@ extern "C"
 {
 	typedef struct sseRegs
 	{
+		unsigned int Offset;
 		char fxsave_region[512 + 16];
 	}__attribute__((aligned(16))) sseRegs;
 
@@ -69,6 +70,8 @@ extern "C"
 	extern void StoreSSEStatus(unsigned int newStatus);
 	// 16-bit aligned address to store the floating point variables.
 	extern void fxSave(char* address);
+	// 16-bit aligned address to copy the floating point variables from into registers.
+	extern void fxStore(char* address);
 }
 
 extern "C"

@@ -32,3 +32,14 @@ fxSave:
 	pop eax
 	pop ebp
 retn
+
+global fxStore
+fxStore:
+	push ebp
+	mov ebp, esp
+	push eax
+	mov eax, [ebp + 8]
+	fxrstor [eax]
+	pop eax
+	pop ebp
+retn

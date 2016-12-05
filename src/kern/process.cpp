@@ -79,8 +79,8 @@ Thread::Thread(unsigned char* name, Process* proc, unsigned int Start, unsigned 
 	struct regs registers;
 	sseRegs sseRegisters;
 	auto addr = (unsigned int)sseRegisters.fxsave_region;
+	sseRegisters.Offset = (16 - ((addr + 16) % 16));
 	addr = addr + (16 - ((addr + 16) % 16));
-	printf("%20x%x\n", addr);
 	fxSave((char*)addr);
 	this->CalledStackSSE.Push(sseRegisters);
 	registers.cs = 0x08;

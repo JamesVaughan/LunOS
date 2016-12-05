@@ -349,10 +349,13 @@ void Scheduler::SaveRegisters(struct regs* r)
 	if(active)
 	{
 		Thread* current = (Thread*)active->data;
-		//sseRegs fxsave_region;
-		//asm volatile(" fxsave %0; "::"m"(fxsave_region.fxsave_region));
 		current->CalledStack.Push(*r);
-		//current->CalledStackSSE.Push(fxsave_region);
+		sseRegs sseRegisters;
+		auto addr = (unsigned int)sseRegisters.fxsave_region;
+		sseRegisters.Offset = (16 - ((addr + 16) % 16));
+		addr = addr + (16 - ((addr + 16) % 16));
+		fxSave((char*)addr);
+		current->CalledStackSSE.Push(sseRegisters);
 	}
 	else
 	{
